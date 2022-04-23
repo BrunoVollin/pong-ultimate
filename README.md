@@ -12,7 +12,7 @@ Primeiramente, gostaria de agradecer à academia e a minha mãe pela receita de 
 
 Para rodar o projeto, você vai precisar de [Python 3](https://www.python.org/downloads/) instalado.
 
-### Instalando Dependências 👊
+### Instalando Outras Dependências 👊
 
 Então, você pode instalar as dependências através do terminal, utilizando:
 
@@ -24,6 +24,6 @@ Depois, é só digitar no terminal, mais uma vez, a seguinte linha de código:
 
 `python main.py`
 
-## Ainda não satisfeito?
+## Insatisfeito?
 
 Então morre, diabo! Só roda `main.exe` e me deixa em paz! 😡
