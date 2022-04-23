@@ -41,7 +41,7 @@ class Ball(Entity):
 
     def __threat_box_collisions__(self):
         if self.hitbox.left <= 0 or self.hitbox.right >= WIDTH:
-            side = "left" if self.hitbox.left <= 0 else "right"
+            side = "right" if self.hitbox.left <= 0 else "left"
             # Could be a lambda function but I'm dumb lmao
             for paddle in self.paddles:
                 if paddle.get_side() == side:
