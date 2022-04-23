@@ -1,4 +1,3 @@
-from turtle import position
 import pygame as pg
 from source.model.ball import Ball
 from source.utils.palette import BALL_COLOR, BG_COLOR
