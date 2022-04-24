@@ -1,29 +1,19 @@
-# Pong Ultimate 1.0
+# Pong Ultimate
 
-![Pong Ultimate 1.0](assets/images/pong_ultimate.png)
+![Pong Ultimate](assets/images/pong_ultimate.png)
 
-## Introdução
+## Introduction
 
-Primeiramente, gostaria de agradecer à academia e a minha mãe pela receita de bolo de banana. Em segundo lugar, esqueci de dizer que esse é meu primeiro trabalho prático da disciplina de Sistemas Operacionais.
+First, I would like to thank the academy and my mother for the banana cake recipe.
+Second, I forgot to mention that this is my first practical project in the **Operating Systems** subject.
 
-## Executando
+## Running
 
-### Instale Python 🐍
+Run `pong-ultimate.exe` and this should work.
 
-Para rodar o projeto, você vai precisar de [Python 3](https://www.python.org/downloads/) instalado.
+However, if you prefer a more traditional way of running a Python project...
 
-### Instalando Outras Dependências 👊
-
-Então, você pode instalar as dependências através do terminal, utilizando:
-
-`python -m pip install -r requirements.txt`
-
-### Rodando Rodando Rodando 🎡 (?)
-
-Depois, é só digitar no terminal, mais uma vez, a seguinte linha de código:
-
-`python main.py`
-
-## Insatisfeito?
-
-Então morre, diabo! Só roda `main.exe` e me deixa em paz! 😡
+1. Download and install [Python 3](https://www.python.org/downloads/);
+2. In the console, run `python -m pip install -r requirements.txt`;
+3. Then, still in the console, run `python main.py`;
+4. Have fun!
