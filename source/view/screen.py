@@ -5,7 +5,7 @@ from source.utils.palette import BG_COLOR, BORDER_COLOR
 
 class Screen(object):
     def __init__(self, info: pg.sprite.Group, entities: pg.sprite.Group):
-        self.display = pg.display.get_surface()
+        self.surface = pg.display.get_surface()
         pg.display.set_caption("Pong")
         self.clock = pg.time.Clock()
         self.info = info
@@ -14,8 +14,8 @@ class Screen(object):
 
     def draw(self):
         self.__draw_borders__()
-        self.info.draw(self.display)
-        self.entities.draw(self.display)
+        self.info.draw(self.surface)
+        self.entities.draw(self.surface)
 
     def update(self):
         self.info.update()
@@ -43,4 +43,4 @@ class Screen(object):
                     surf = pg.Surface((size, HEIGHT))
             surf.fill(BORDER_COLOR)
             rect = surf.get_rect(center=pos)
-            self.display.blit(surf, rect)
+            self.surface.blit(surf, rect)
