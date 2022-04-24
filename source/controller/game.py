@@ -15,6 +15,9 @@ class Game(object):
         pg.init()
         self.window = pg.display.set_mode(RESOLUTION)
         pg.display.set_caption("Pong Ultimate")
+        icon_path = "assets/images/game-icon.png"
+        icon = pg.image.load(icon_path)
+        pg.display.set_icon(icon)
         self.clock = pg.time.Clock()
         self.entities = pg.sprite.Group()
         self.info = pg.sprite.Group()
@@ -29,6 +32,7 @@ class Game(object):
         music_path = "assets/music/Beep_beat_by-feels_B._loop.wav"
         bg_music = pg.mixer.Sound(music_path)
         bg_music.play(-1)
+        bg_music.set_volume(0.2)
 
     def run(self):
         while True:

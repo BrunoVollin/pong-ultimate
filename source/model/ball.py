@@ -15,8 +15,11 @@ class Ball(Entity):
         sound_2 = "assets/sounds/4383__noisecollector__pongblipd3.wav"
         sound_3 = "assets/sounds/Coin.mp3"
         self.paddle_collision_sfx = pg.mixer.Sound(sound_1)
+        self.paddle_collision_sfx.set_volume(0.5)
         self.box_collision_sfx = pg.mixer.Sound(sound_2)
+        self.box_collision_sfx.set_volume(0.5)
         self.score_up_sfx = pg.mixer.Sound(sound_3)
+        self.score_up_sfx.set_volume(0.5)
 
     def update(self):
         self.__input__()
