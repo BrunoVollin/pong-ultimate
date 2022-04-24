@@ -13,26 +13,18 @@ from source.view.screen import Screen
 class Game(object):
     def __init__(self):
         pg.init()
-        # Window
         self.window = pg.display.set_mode(RESOLUTION)
-        # Clock
         self.clock = pg.time.Clock()
-        # Groups
         self.entities = pg.sprite.Group()
         self.info = pg.sprite.Group()
-        # Entities
         self.p1 = Paddle(self.entities, "left")
         self.p2 = Paddle(self.entities, "right")
         self.ball = Ball(self.entities, [self.p1, self.p2])
-        # Information
         self.scoreboard_p1 = Scoreboard(self.info, self.p1)
         self.scoreboard_p2 = Scoreboard(self.info, self.p2)
         self.pause_txt = PauseText(self.info, self.ball)
-        # Screen
         self.screen = Screen(self.info, self.entities)
-        # Thread Management
         self.run_threads = True
-        # Game Music
         music_path = "assets/music/Beep_beat_by-feels_B._loop.wav"
         bg_music = pg.mixer.Sound(music_path)
         bg_music.play(-1)
@@ -60,11 +52,11 @@ class Game(object):
         pg.display.flip()
 
     def increase_ball_speed(self):
-        count = 0
+        count = 1
         while self.run_threads:
             if self.ball.is_moving():
-                sleep(1)
-                count += 1
                 if count == 5:
                     self.ball.increase_speed()
-                    count = 0
+                    count = 1
+                sleep(1)
+                count += 1
