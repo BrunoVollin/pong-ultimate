@@ -6,7 +6,6 @@ from source.utils.palette import BG_COLOR, BORDER_COLOR
 class Screen(object):
     def __init__(self, info: pg.sprite.Group, entities: pg.sprite.Group):
         self.surface = pg.display.get_surface()
-        pg.display.set_caption("Pong")
         self.clock = pg.time.Clock()
         self.info = info
         self.entities = entities
