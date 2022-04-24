@@ -14,6 +14,7 @@ class Game(object):
     def __init__(self):
         pg.init()
         self.window = pg.display.set_mode(RESOLUTION)
+        pg.display.set_caption("Pong Ultimate")
         self.clock = pg.time.Clock()
         self.entities = pg.sprite.Group()
         self.info = pg.sprite.Group()
@@ -38,7 +39,8 @@ class Game(object):
 
     def __get_events__(self):
         for event in pg.event.get():
-            if event.type == pg.QUIT:
+            keys = pg.key.get_pressed()
+            if event.type == pg.QUIT or keys[pg.K_ESCAPE]:
                 self.run_threads = False
                 print("GAME OVER!\n")
                 sys.exit()
