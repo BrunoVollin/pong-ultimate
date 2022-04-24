@@ -7,8 +7,8 @@ from source.utils.settings import HEIGHT, WIDTH
 
 class Ball(Entity):
     def __init__(self, categories: pg.sprite.Group | list, paddles: list):
-        super().__init__(categories, (WIDTH // 2, HEIGHT // 2), (15, 15),
-                         5, BALL_COLOR)
+        super().__init__(categories, (WIDTH // 2, HEIGHT // 2),
+                         (15, 15), 5, BALL_COLOR)
         self.paddles = paddles
         self.moving = False
         sound_1 = "assets/sounds/4382__noisecollector__pongblipd-5.wav"
