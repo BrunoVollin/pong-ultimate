@@ -12,7 +12,7 @@ class Screen(object):
         self.info.update()
 
     def draw(self):
-        self.__draw_borders__()
+        self._borders()
         self.info.draw(self.surface)
         self.entities.draw(self.surface)
 
@@ -20,7 +20,7 @@ class Screen(object):
         self.info.update()
         self.entities.update()
 
-    def __draw_borders__(self):
+    def _borders(self):
         for place in ["middle", "top", "bottom", "left", "right"]:
             if place == "middle":
                 size = 5

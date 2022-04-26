@@ -1,11 +1,10 @@
 import pygame as pg
-from source.model.paddle import Paddle
 from source.utils.palette import P1_COLOR, P2_COLOR
 from source.utils.settings import WIDTH, HEIGHT
 
 
 class Scoreboard(pg.sprite.Sprite):
-    def __init__(self, categories: pg.sprite.Group | list, paddle: Paddle):
+    def __init__(self, categories, paddle):
         super().__init__(categories)
         self.paddle = paddle
         self.font = pg.font.Font("assets/fonts/dotty/dotty.ttf", 256)

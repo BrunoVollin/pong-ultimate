@@ -2,8 +2,7 @@ import pygame as pg
 
 
 class Entity(pg.sprite.Sprite):
-    def __init__(self, categories: pg.sprite.Group | list, pos: tuple,
-                 size: tuple, base_speed: int, color: str):
+    def __init__(self, categories, pos, size, base_speed, color):
         super().__init__(categories)
         self.image = pg.Surface(size)
         self.image.fill(color)

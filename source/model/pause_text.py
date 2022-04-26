@@ -1,11 +1,10 @@
 import pygame as pg
-from source.model.ball import Ball
 from source.utils.palette import BALL_COLOR, BG_COLOR
 from source.utils.settings import WIDTH, HEIGHT
 
 
 class PauseText(pg.sprite.Sprite):
-    def __init__(self, categories: pg.sprite.Group | list, ball: Ball):
+    def __init__(self, categories, ball):
         super().__init__(categories)
         self.ball = ball
         self.font = pg.font.Font("assets/fonts/dotty/dotty.ttf", 256)

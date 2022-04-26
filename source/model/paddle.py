@@ -5,7 +5,7 @@ from source.utils.settings import WIDTH, HEIGHT
 
 
 class Paddle(Entity):
-    def __init__(self, categories: pg.sprite.Group | list, side: str):
+    def __init__(self, categories, side):
         if not side in ["left", "right"]:
             raise ValueError("Side must be 'left' or 'right'!")
         pos = (30, HEIGHT // 2) if side == "left" else (WIDTH - 30, HEIGHT // 2)
@@ -15,10 +15,10 @@ class Paddle(Entity):
         self.score = 0
 
     def update(self):
-        self.__input__()
-        self.__move__()
+        self._input()
+        self._move()
 
-    def __input__(self):
+    def _input(self):
         keys = pg.key.get_pressed()
         if self.side == "left":
             if keys[pg.K_w]:
@@ -35,12 +35,12 @@ class Paddle(Entity):
             else:
                 self.direction.y = 0
 
-    def __move__(self):
+    def _move(self):
         self.hitbox.y += self.direction.y * self.speed
-        self.__threat_collisions__()
+        self._collisions()
         self.rect.center = self.hitbox.center
 
-    def __threat_collisions__(self):
+    def _collisions(self):
         if self.direction.y == -1 and self.rect.top <= 0:
             self.hitbox.top = 0
         elif self.direction.y == 1 and self.rect.bottom >= HEIGHT:

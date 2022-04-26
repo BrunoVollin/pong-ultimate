@@ -10,25 +10,32 @@ from source.utils.settings import FPS, RESOLUTION
 from source.view.screen import Screen
 
 
-class Game(object):
+class Game:
     def __init__(self):
         pg.init()
+        # Window
         self.window = pg.display.set_mode(RESOLUTION)
         pg.display.set_caption("Pong Ultimate")
         icon_path = "assets/images/game-icon.png"
         icon = pg.image.load(icon_path)
         pg.display.set_icon(icon)
+        # Clock
         self.clock = pg.time.Clock()
+        # Groups
         self.entities = pg.sprite.Group()
         self.info = pg.sprite.Group()
+        # Entities
         self.p1 = Paddle(self.entities, "left")
         self.p2 = Paddle(self.entities, "right")
         self.ball = Ball(self.entities, [self.p1, self.p2])
+        # Info
         self.scoreboard_p1 = Scoreboard(self.info, self.p1)
         self.scoreboard_p2 = Scoreboard(self.info, self.p2)
         self.pause_txt = PauseText(self.info, self.ball)
         self.screen = Screen(self.info, self.entities)
+        # Threads
         self.run_threads = True
+        # BGM
         music_path = "assets/music/Beep_beat_by-feels_B._loop.wav"
         bg_music = pg.mixer.Sound(music_path)
         bg_music.play(-1)
@@ -37,11 +44,11 @@ class Game(object):
     def run(self):
         while True:
             self.clock.tick(FPS)
-            self.__get_events__()
-            self.__update__()
-            self.__draw__()
+            self._events()
+            self._update()
+            self._draw()
 
-    def __get_events__(self):
+    def _events(self):
         for event in pg.event.get():
             keys = pg.key.get_pressed()
             if event.type == pg.QUIT or keys[pg.K_ESCAPE]:
@@ -49,10 +56,10 @@ class Game(object):
                 print("GAME OVER!\n")
                 sys.exit()
 
-    def __update__(self):
+    def _update(self):
         self.screen.update()
 
-    def __draw__(self):
+    def _draw(self):
         self.window.fill(BG_COLOR)
         self.screen.draw()
         pg.display.flip()

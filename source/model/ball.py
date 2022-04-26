@@ -1,14 +1,13 @@
 import pygame as pg
 import numpy as np
-from source.utils.palette import BALL_COLOR
 from source.model.entity import Entity
-from source.utils.settings import HEIGHT, WIDTH
+from source.utils.palette import BALL_COLOR
+from source.utils.settings import WIDTH, HEIGHT
 
 
 class Ball(Entity):
-    def __init__(self, categories: pg.sprite.Group | list, paddles: list):
-        super().__init__(categories, (WIDTH // 2, HEIGHT // 2),
-                         (15, 15), 5, BALL_COLOR)
+    def __init__(self, categories, paddles):
+        super().__init__(categories, (WIDTH // 2, HEIGHT // 2), (15, 15), 5, BALL_COLOR)
         self.paddles = paddles
         self.moving = False
         sound_1 = "assets/sounds/4382__noisecollector__pongblipd-5.wav"
@@ -22,10 +21,10 @@ class Ball(Entity):
         self.score_up_sfx.set_volume(0.5)
 
     def update(self):
-        self.__input__()
-        self.__move__()
+        self._input()
+        self._move()
 
-    def __input__(self):
+    def _input(self):
         if not self.moving:
             keys = pg.key.get_pressed()
             if keys[pg.K_SPACE]:
@@ -35,14 +34,14 @@ class Ball(Entity):
                 self.speed = self.base_speed
                 self.moving = True
 
-    def __move__(self):
+    def _move(self):
         self.hitbox.x += self.direction.x * self.speed
         self.hitbox.y += self.direction.y * self.speed
-        self.__threat_box_collisions__()
-        self.__threat_paddle_collisions__()
+        self._box_collisions()
+        self._paddle_collisions()
         self.rect.center = self.hitbox.center
 
-    def __threat_box_collisions__(self):
+    def _box_collisions(self):
         if self.hitbox.left <= 0 or self.hitbox.right >= WIDTH:
             side = "right" if self.hitbox.left <= 0 else "left"
             # Could be a lambda function but I'm dumb lmao
@@ -58,7 +57,7 @@ class Ball(Entity):
             self.direction.y *= -1
             self.box_collision_sfx.play()
 
-    def __threat_paddle_collisions__(self):
+    def _paddle_collisions(self):
         for paddle in self.paddles:
             if self.hitbox.colliderect(paddle.hitbox):
                 self.direction.x *= -1
@@ -69,5 +68,5 @@ class Ball(Entity):
     def increase_speed(self):
         self.speed += 1
 
-    def is_moving(self, condition: bool = True):
+    def is_moving(self, condition=True):
         return self.moving == condition
