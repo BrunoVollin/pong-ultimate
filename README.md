@@ -5,7 +5,7 @@
 ## Introduction
 
 First, I would like to thank the academy and my mother for the banana cake recipe.
-Second, I forgot to mention that this is my first practical project in the **Operating Systems** subject.
+Second, I forgot to mention that this is my first practical project in the **Operating Systems** class.
 
 ## Running
 
