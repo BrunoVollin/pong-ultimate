@@ -4,9 +4,9 @@ from source.utils.palette import BALL_COLOR, BG_COLOR, BORDER_COLOR
 
 
 class Screen:
-    def __init__(self, __entities):
+    def __init__(self, entities):
         self.__surface = pg.display.get_surface()
-        self.__entities = __entities
+        self.__entities = entities
 
     def draw(self):
         self.__draw_borders()
