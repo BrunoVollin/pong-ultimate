@@ -7,16 +7,13 @@ from source.utils.settings import WIDTH, HEIGHT
 
 class Paddle(Entity):
     def __init__(self, groups, side):
-        if not side in ["left", "right"]:
-            raise ValueError("Side must be 'left' or 'right'!")
-        else:
-            pos = (30, HEIGHT // 2) if side == "left" else (WIDTH - 30, HEIGHT // 2)
-            size = 10, 120
-            _base_speed = 4
-            color = P1_COLOR if side == "left" else P2_COLOR
-            super().__init__(groups, pos, size, _base_speed, color)
-            self.__side = side
-            self.__score = Score(groups, side)
+        pos = (30, HEIGHT // 2) if side == "left" else (WIDTH - 30, HEIGHT // 2)
+        size = 10, 120
+        base_speed = 4
+        color = P1_COLOR if side == "left" else P2_COLOR
+        super().__init__(groups, pos, size, base_speed, color)
+        self.__side = side
+        self.__score = Score(groups, side)
 
     def update(self):
         self.__input()
