@@ -1,56 +1,57 @@
 import pygame as pg
 from source.model.entity import Entity
+from source.model.score import Score
 from source.utils.palette import P1_COLOR, P2_COLOR
 from source.utils.settings import WIDTH, HEIGHT
 
 
 class Paddle(Entity):
-    def __init__(self, categories, side):
+    def __init__(self, groups, side):
         if not side in ["left", "right"]:
             raise ValueError("Side must be 'left' or 'right'!")
-        pos = (30, HEIGHT // 2) if side == "left" else (WIDTH - 30, HEIGHT // 2)
-        color = P1_COLOR if side == "left" else P2_COLOR
-        super().__init__(categories, pos, (10, 120), 4, color)
-        self.side = side
-        self.score = 0
+        else:
+            pos = (30, HEIGHT // 2) if side == "left" else (WIDTH - 30, HEIGHT // 2)
+            size = 10, 120
+            _base_speed = 4
+            color = P1_COLOR if side == "left" else P2_COLOR
+            super().__init__(groups, pos, size, _base_speed, color)
+            self.__side = side
+            self.__score = Score(groups, side)
 
     def update(self):
-        self._input()
-        self._move()
+        self.__input()
+        self.__move()
 
-    def _input(self):
+    def __input(self):
         keys = pg.key.get_pressed()
-        if self.side == "left":
+        if self.__side == "left":
             if keys[pg.K_w]:
-                self.direction.y = -1
+                self._direction.y = -1
             elif keys[pg.K_s]:
-                self.direction.y = 1
+                self._direction.y = 1
             else:
-                self.direction.y = 0
-        elif self.side == "right":
+                self._direction.y = 0
+        elif self.__side == "right":
             if keys[pg.K_UP]:
-                self.direction.y = -1
+                self._direction.y = -1
             elif keys[pg.K_DOWN]:
-                self.direction.y = 1
+                self._direction.y = 1
             else:
-                self.direction.y = 0
+                self._direction.y = 0
 
-    def _move(self):
-        self.hitbox.y += self.direction.y * self.speed
-        self._collisions()
-        self.rect.center = self.hitbox.center
+    def __move(self):
+        self._hitbox.y += self._direction.y * self._speed
+        self.__handle_collisions()
+        self.rect.center = self._hitbox.center
 
-    def _collisions(self):
-        if self.direction.y == -1 and self.rect.top <= 0:
-            self.hitbox.top = 0
-        elif self.direction.y == 1 and self.rect.bottom >= HEIGHT:
-            self.hitbox.bottom = HEIGHT
+    def __handle_collisions(self):
+        if self._direction.y == -1 and self.rect.top <= 0:
+            self._hitbox.top = 0
+        elif self._direction.y == 1 and self.rect.bottom >= HEIGHT:
+            self._hitbox.bottom = HEIGHT
 
     def increase_score(self):
-        self.score += 1
+        self.__score.increase()
 
     def get_side(self):
-        return self.side
-
-    def get_score(self):
-        return str(self.score)
+        return self.__side
