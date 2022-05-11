@@ -1,26 +1,21 @@
 import pygame as pg
 from source.utils.settings import WIDTH, HEIGHT
-from source.utils.palette import BG_COLOR, BORDER_COLOR
+from source.utils.palette import BALL_COLOR, BG_COLOR, BORDER_COLOR
 
 
-class Screen(object):
-    def __init__(self, info: pg.sprite.Group, entities: pg.sprite.Group):
-        self.surface = pg.display.get_surface()
-        self.clock = pg.time.Clock()
-        self.info = info
-        self.entities = entities
-        self.info.update()
+class Screen:
+    def __init__(self, __entities):
+        self.__surface = pg.display.get_surface()
+        self.__entities = __entities
 
     def draw(self):
-        self._borders()
-        self.info.draw(self.surface)
-        self.entities.draw(self.surface)
+        self.__draw_borders()
+        self.__entities.draw(self.__surface)
 
     def update(self):
-        self.info.update()
-        self.entities.update()
+        self.__entities.update()
 
-    def _borders(self):
+    def __draw_borders(self):
         for place in ["middle", "top", "bottom", "left", "right"]:
             if place == "middle":
                 size = 5
@@ -42,4 +37,14 @@ class Screen(object):
                     surf = pg.Surface((size, HEIGHT))
             surf.fill(BORDER_COLOR)
             rect = surf.get_rect(center=pos)
-            self.surface.blit(surf, rect)
+            self.__surface.blit(surf, rect)
+
+    def pause_text(self, ball_is_moving):
+        if not ball_is_moving:
+            font = pg.font.Font("assets/fonts/dotty/dotty.ttf", 256)
+            image = font.render("SPACE", False, BALL_COLOR, BG_COLOR)
+            rect = image.get_rect(center=(WIDTH // 2, HEIGHT * 3 // 4))
+        else:
+            image = pg.Surface((0, 0))
+            rect = image.get_rect()
+        self.__surface.blit(image, rect)
