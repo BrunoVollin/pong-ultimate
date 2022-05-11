@@ -18,6 +18,6 @@ setup(
     version="1.1",
     description="He will rise...",
     options={"build_exe": build_exe_options},
-    executables=[Executable("main.py", base=base)],
-    icon="assets/images/app-icon.ico"
+    executables=[Executable("main.py", base=base,
+                            icon="assets/images/app-icon.ico")]
 )
