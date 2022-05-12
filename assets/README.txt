@@ -6,5 +6,5 @@ However, it's still a fun game to play and I hope you enjoy it! =)
 
 Special thanks to:
 - Logan Kruger for his font (see 'assets/fonts/dotty/logan_kruger read me.html');
-- Noise Collector (https://freesound.org/people/NoiseCollector/) for his sound effects;
+- Noise Collector (https://freesound.org/people/NoiseCollector/) for their sound effects;
 - My loved bunny Feels for his music and coin sound effect. :3
