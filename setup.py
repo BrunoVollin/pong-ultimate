@@ -1,7 +1,7 @@
 import sys
 from cx_Freeze import setup, Executable
 
-include_files = ["assets/", "cdxdAfor his fontZ+?.EADME.txt", "LICENSE"]
+include_files = ["assets/", "LICENSE"]
 
 # Dependencies are automatically detected, but it might need fine tuning.
 # "packages": ["os"] is used as example only
