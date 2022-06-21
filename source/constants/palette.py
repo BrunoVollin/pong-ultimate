@@ -1,0 +1,8 @@
+'''
+Color palette for the game.
+'''
+BACKGROUND_COLOR = '#222034'
+BALL_COLOR = '#37946E'
+BORDER_COLOR = '#306082'
+P1_COLOR = '#3F3F74'
+P2_COLOR = '#AC3232'
