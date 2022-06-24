@@ -23,6 +23,10 @@ class Score(pg.sprite.Sprite):
             self.color = P2_COLOR
         else:
             raise ValueError('paddle_side must be either "left" or "right".')
+        # Score SFX
+        sound_3 = 'assets/sounds/Coin.mp3'
+        self.score_up_sfx = pg.mixer.Sound(sound_3)
+        self.score_up_sfx.set_volume(0.5)
         self.update()
 
     def update(self):
@@ -37,3 +41,4 @@ class Score(pg.sprite.Sprite):
         Increases the score by 1.
         '''
         self.total += 1
+        self.score_up_sfx.play()

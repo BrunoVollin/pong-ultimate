@@ -6,8 +6,8 @@ import numpy as np
 
 from source.constants import WIDTH, HEIGHT
 from source.constants.palette import BALL_COLOR, P1_COLOR, P2_COLOR
-from source.sprites.entity import Entity
-from source.sprites.score import Score
+from source.entities.entity import Entity
+from source.entities.score import Score
 
 
 class Ball(Entity):
@@ -30,10 +30,6 @@ class Ball(Entity):
         sound_2 = 'assets/sounds/4383__noisecollector__pongblipd3.wav'
         self.box_collision_sfx = pg.mixer.Sound(sound_2)
         self.box_collision_sfx.set_volume(0.5)
-        # Score SFX
-        sound_3 = 'assets/sounds/Coin.mp3'
-        self.score_up_sfx = pg.mixer.Sound(sound_3)
-        self.score_up_sfx.set_volume(0.5)
 
     def input(self):
         '''
@@ -70,7 +66,6 @@ class Ball(Entity):
             for paddle in self.paddles:
                 if paddle.get_side() == side:
                     paddle.increase_score()
-                    self.score_up_sfx.play()
             self.hitbox.center = (WIDTH // 2, HEIGHT // 2)
             self.direction.x = 0
             self.direction.y = 0
@@ -85,7 +80,11 @@ class Ball(Entity):
         '''
         for paddle in self.paddles:
             if self.hitbox.colliderect(paddle.hitbox):
-                self.direction.x *= -1
+                if self.hitbox.bottom == paddle.hitbox.top or \
+                        self.hitbox.top == paddle.hitbox.bottom:
+                    self.direction.y *= -1
+                else:
+                    self.direction.x *= -1
                 self.hitbox.x += self.direction.x * self.speed
                 self.hitbox.y += self.direction.y * self.speed
                 self.paddle_collision_sfx.play()
@@ -110,9 +109,9 @@ class Paddle(Entity):
 
     def __init__(self, groups, side):
         if side == 'left':
-            super().__init__(groups, (30, HEIGHT // 2), (10, 120), 4, P1_COLOR)
+            super().__init__(groups, (30, HEIGHT // 2), (10, 120), 6, P1_COLOR)
         elif side == 'right':
-            super().__init__(groups, (WIDTH - 30, HEIGHT // 2), (10, 120), 4, P2_COLOR)
+            super().__init__(groups, (WIDTH - 30, HEIGHT // 2), (10, 120), 6, P2_COLOR)
         self.score = Score(groups, side)
         self.side = side
 

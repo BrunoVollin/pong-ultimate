@@ -8,7 +8,7 @@ from source.constants import FPS, RESOLUTION, TITLE
 from source.constants.palette import BACKGROUND_COLOR
 from source.ui import UserInterface
 from source.ui.cli import cmd_clear
-from source.sprites import Ball, Paddle
+from source.entities import Ball, Paddle
 
 
 class Game:
@@ -25,6 +25,9 @@ class Game:
         pg.display.set_icon(icon)
         # Clock
         self.clock = pg.time.Clock()
+        # Threads
+        self.event = Event()
+        self.thread = Thread(target=self.increase_ball_speed)
         # Groups
         self.entities = pg.sprite.Group()
         # Entities
@@ -33,12 +36,9 @@ class Game:
         self.ball = Ball(self.entities, [player_1, player_2])
         # Info
         self.user_interface = UserInterface(self.entities.draw)
-        # Threads
-        self.event = Event()
-        self.thread = Thread(target=self.increase_ball_speed)
         # BGM
         pg.mixer.music.load('assets/music/Beep_beat_by-feels_B._loop.wav')
-        pg.mixer.music.set_volume(0.2)
+        pg.mixer.music.set_volume(0.5)
         pg.mixer.music.play(-1)
 
     def run(self):
@@ -77,6 +77,8 @@ class Game:
             if self.ball.is_moving():
                 self.event.wait(5)
                 self.ball.increase_speed()
+            else:
+                self.event.wait(0.5)
 
 
 if __name__ == '__main__':
